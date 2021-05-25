@@ -65,3 +65,33 @@ ALTER TABLE Persona
     ADD CONSTRAINT FK_Tipo_Usuario
     FOREIGN KEY (Id_Tipo)
     REFERENCES Tipo_Usuario(Id_Tipo);
+    
+ALTER TABLE Cuenta
+    ADD CONSTRAINT FK_Identificacion
+    FOREIGN KEY (Identificacion)
+    REFERENCES Persona(Identificacion);
+    
+ALTER TABLE Cuenta
+    ADD CONSTRAINT FK_Id_Tipo_Cuenta
+    FOREIGN KEY (Id_Tipo_Cuenta)
+    REFERENCES Tipo_Cuenta(Id_Tipo_Cuenta);
+    
+ALTER TABLE Cuenta
+    ADD CONSTRAINT FK_Id_Sucursal
+    FOREIGN KEY (Id_Sucursal)
+    REFERENCES Sucursal(Id_Sucursal);
+    
+ALTER TABLE Debito_Credito
+    ADD CONSTRAINT FK_Id_transaccion
+    FOREIGN KEY (Id_Transaccion)
+    REFERENCES Transaccion(Id_Transaccion);
+    
+ALTER TABLE Debito_Credito
+    ADD CONSTRAINT FK_Id_Cuenta
+    FOREIGN KEY (Id_Cuenta)
+    REFERENCES Cuenta(Id_Cuenta);
+    
+ALTER TABLE Transaccion
+    ADD CONSTRAINT FK_Id_Tipo_Transaccion
+    FOREIGN KEY(Id_Tipo_Transaccion)
+    REFERENCES Tipo_Transaccion(Id_Tipo_Transaccion);
