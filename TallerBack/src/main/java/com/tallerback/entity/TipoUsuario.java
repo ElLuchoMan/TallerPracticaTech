@@ -1,4 +1,4 @@
-package com.talllerback.models;
+package com.tallerback.entity;
 
 import java.util.Set;
 
@@ -11,13 +11,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TIPO_USUARIO")
+@Table(name = "tipousuario", schema="tallertech")
 
 public class TipoUsuario {
 	@Id
 	@Column(name="ID_TIPO", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_Tipo;
+	private Long id_Tipo;
 	
 	@Column(name = "DESCRIPCION", nullable = false)
 	private String descripcion;
@@ -25,16 +25,12 @@ public class TipoUsuario {
 	@OneToMany(mappedBy="tipoUsuario")
 	Set<Persona> usuarios;
 
-		
-	public TipoUsuario() {
-		super();
-	}
 
-	public int getId_Tipo() {
+	public Long getId_Tipo() {
 		return id_Tipo;
 	}
 
-	public void setId_Tipo(int id_Tipo) {
+	public void setId_Tipo(Long id_Tipo) {
 		this.id_Tipo = id_Tipo;
 	}
 

@@ -1,4 +1,4 @@
-package com.talllerback.models;
+package com.tallerback.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,7 +19,7 @@ public class Persona {
 		
 	@Id
 	@Column(name="IDENTIFICACION", nullable = false)
-	private int Identificacion;
+	private Long Identificacion;
 	
 	@Column(name="PRIMER_NOMBRE", length=30, nullable=false)
 	private String primer_nombre;
