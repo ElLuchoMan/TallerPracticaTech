@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity
 @Table(name = "tipousuario", schema="tallertech")
 
@@ -17,21 +20,22 @@ public class TipoUsuario {
 	@Id
 	@Column(name="ID_TIPO", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_Tipo;
+	private Long id_tipo;
 	
 	@Column(name = "DESCRIPCION", nullable = false)
 	private String descripcion;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="tipoUsuario")
 	Set<Persona> usuarios;
 
 
 	public Long getId_Tipo() {
-		return id_Tipo;
+		return id_tipo;
 	}
 
-	public void setId_Tipo(Long id_Tipo) {
-		this.id_Tipo = id_Tipo;
+	public void setId_Tipo(Long id_tipo) {
+		this.id_tipo = id_tipo;
 	}
 
 	public String getDescripcion() {
@@ -46,5 +50,7 @@ public class TipoUsuario {
 		return usuarios;
 	}
 	
-	
+	public void setDescription(Set<Persona> usuarios) {
+		this.usuarios = usuarios;
+	}
 }

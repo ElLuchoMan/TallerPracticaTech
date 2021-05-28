@@ -40,7 +40,7 @@ public class TipoUsuarioService{
 			tipoUsuarioRepository.deleteById(id);
 			return "Tipo de Usuario borrado correctamente";
 		}
-		return "Error, el Tipo de Usuario no existe!";
+		return null;
 	}
 
 	public TipoUsuario updateTipoUsuario(TipoUsuario tipoUsuario) {
@@ -55,6 +55,4 @@ public class TipoUsuarioService{
 		}
 		return null;
 	}
-	
-	
 }

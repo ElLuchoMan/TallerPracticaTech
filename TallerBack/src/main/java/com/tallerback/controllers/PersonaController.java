@@ -16,25 +16,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.tallerback.entity.TipoUsuario;
-import com.tallerback.services.TipoUsuarioService;
+import com.tallerback.entity.Persona;
+import com.tallerback.services.PersonaService;
+
 
 @RestController
-@RequestMapping(path="/tipoUsuarios")
+@RequestMapping(path="/persona")
 @CrossOrigin(origins = "*")
-public class TipoUsuarioController {
+public class PersonaController {
 	
 	@Autowired
-	TipoUsuarioService tipoUsuarioService;
+	PersonaService personaService;
 	
 	@GetMapping
-	public List<TipoUsuario> getAll(){
-		return tipoUsuarioService.findAllTipoUsuario();
+	public List<Persona> getAll(){
+		return personaService.findAllPersona();
 	}
 	
 	@GetMapping(path="/{id}")
-	public Optional<TipoUsuario> getById(@PathVariable Long id) {
-		Optional<TipoUsuario> usr = tipoUsuarioService.findTipoUsuarioById(id);
+	public Optional<Persona> getById(@PathVariable String id) {
+		Optional<Persona> usr = personaService.findPersonaById(id);
 		if(usr != null) {
 			return usr;
 		}
@@ -42,13 +43,16 @@ public class TipoUsuarioController {
 	}
 	
 	@PostMapping
-	public void insert(@RequestBody TipoUsuario nuevoTipo) {
-		tipoUsuarioService.saveTipoUsuario(nuevoTipo);
+	public void insert(@RequestBody Persona nuevoPersona) {
+		if(personaService.findPersonaById(nuevoPersona.getIdentificacion()).isPresent()) {
+			throw new ResponseStatusException(HttpStatus.ALREADY_REPORTED, "Usuario ya creado");
+		}
+		personaService.savePersona(nuevoPersona);
 	}
 	
 	@PutMapping
-	public TipoUsuario modify(@RequestBody TipoUsuario tipoUsuario) {
-		TipoUsuario modificado = tipoUsuarioService.updateTipoUsuario(tipoUsuario);
+	public Persona modify(@RequestBody Persona persona) {
+		Persona modificado = personaService.updatePersona(persona);
 		if(modificado == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
 		}
@@ -56,8 +60,8 @@ public class TipoUsuarioController {
 	}
 	
 	@DeleteMapping
-	public void delete(@RequestBody TipoUsuario tipoABorrar) {
-		if(tipoUsuarioService.deleteTipoUsuario(tipoABorrar.getId_Tipo())!=null) {
+	public void delete(@RequestBody Persona personaABorrar) {
+		if(personaService.deletePersona(personaABorrar.getIdentificacion())!=null) {
 			throw new ResponseStatusException(HttpStatus.ACCEPTED,"Borrado");
 		}
 		else {
